@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="confContents">
+    	<table class="table">
+   		<tr th:if="*{id}">
+   		<td>ID</td>
+   		<td>
+   			<span th:text="*{id}"></span>
+   			<input type="hidden" name="value" th:field="*{id}" />
+   		</td>
+   		</tr>
+   		<tr>
+   		<td>名称</td>
+   		<td>
+   			<span th:text="*{value}"></span>
+   			<input type="hidden" name="value" th:field="*{value}" />
+   		</td>
+   		</tr>
+   		<tr>
+   		<td>出発日</td>
+   		<td>
+   			<span th:text="*{departureDate}"></span>
+   			<input type="hidden" name="value" th:field="*{departureDate}" />
+   		</td>
+   		</tr>
+   		<tr>
+   		<td>説明</td>
+   		<td>
+   			<span th:text="*{note}"></span>
+   			<input type="hidden" name="value" th:field="*{note}" />
+   		</td>
+   		</tr>
+    	</table>
+	</div>
+</body>
+</html>

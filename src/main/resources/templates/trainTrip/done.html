@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{commons/layout}">
+
+<div layout:fragment="contents" class="text-center">
+
+<h5>登録しました</h5>
+
+<form th:action="@{/train-trip/}" method="get" style="margin-top:20px;">
+<input type="submit" name="top" value="一覧へ" class="btn btn-light" />
+</form>
+</div>

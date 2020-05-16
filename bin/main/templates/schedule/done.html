@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>電車旅</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1>電車旅</h1>
+
+<div>登録しました</div>
+
+<form th:action="@{/train-trip/view-handle}" method="post">
+<input type="hidden" name="id" th:value="${trainTripId}" />
+<input type="submit" name="view" value="詳細へ"/>
+</form>
+</body>
+</html>

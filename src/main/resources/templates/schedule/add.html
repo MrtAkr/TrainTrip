@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{commons/layout}">
+
+<div layout:fragment="contents">
+<form th:action="@{/schedule/add-conf}" th:object="${daiForm}" method="post">
+    
+<div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger alert-dismissible fade show">
+	<div th:each="e : ${#fields.detailedErrors()}" th:text="${e.message}"></div>
+	<button type="button" class="close" data-dismiss="alert">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="form-group row">
+<label for="dayNumber" class="col-form-label col-sm-3 text-sm-right"></label>
+<div class="col-sm-9">
+<select th:field="*{dayNumber}">
+<option th:each="i : ${#numbers.sequence(1, next)}" th:value="${i}" th:text="${i}+ '日目'"></option>
+</select>
+<span th:errors="*{dayNumber}" class="badge badge-danger text-left"></span>
+</div>
+</div>
+
+<div class="form-group row">
+<label for="trainName" class="col-form-label col-sm-3 text-sm-right">乗車路線名</label>
+<div class="col-sm-9">
+<input type="text" th:field="*{trainName}" th:errorclass="is-invalid" class="form-control" />
+<span th:errors="*{trainName}" class="badge badge-danger text-left"></span>
+</div>
+</div>
+
+<hr>
+
+<div class="form-group row">
+<label for="depTime" class="col-form-label col-sm-3 text-sm-right">発車時刻</label>
+<div class="col-sm-9 form-row">
+<div class="col-2">
+<input type="text" th:field="*{depTime}" size="4" th:errorclass="is-invalid" class="form-control" />
+</div>
+：
+<div class="col-2">
+<input type="text" th:field="*{depMinute}" size="4" th:errorclass="is-invalid" class="form-control" />
+</div>
+<span th:errors="*{depTime}" class="badge badge-danger text-left"></span>
+<span th:errors="*{depMinute}" class="badge badge-danger text-left"></span>
+</div>
+</div>
+
+<div class="form-group row">
+<label for="depStationName" class="col-form-label col-sm-3 text-sm-right">発車駅名</label>
+<div class="col-sm-9">
+<input type="text" th:field="*{depStationName}" th:errorclass="is-invalid" class="form-control" />
+<span th:errors="*{depStationName}" class="badge badge-danger text-left"></span>
+</div>
+</div>
+
+<hr>
+
+<div class="form-group row">
+<label for="arrTime" class="col-form-label col-sm-3 text-sm-right">到着時刻</label>
+<div class="col-sm-9 form-row">
+<div class="col-2">
+<input type="text" th:field="*{arrTime}" size="4" th:errorclass="is-invalid" class="form-control" />
+</div>
+：
+<div class="col-2">
+<input type="text" th:field="*{arrMinute}" size="4" th:errorclass="is-invalid" class="form-control" />
+</div>
+<span th:errors="*{arrTime}" class="badge badge-danger text-left"></span>
+<span th:errors="*{arrMinute}" class="badge badge-danger text-left"></span>
+</div>
+</div>
+
+<div class="form-group row">
+<label for="arrStationName" class="col-form-label col-sm-3 text-sm-right">到着駅名</label>
+<div class="col-sm-9">
+<input type="text" th:field="*{arrStationName}" th:errorclass="is-invalid" class="form-control" />
+<span th:errors="*{arrStationName}" class="badge badge-danger text-left"></span>
+</div>
+</div>
+
+<input type="hidden" th:field="*{trainTripId}" />
+
+<div class="col-sm-6 offset-sm-3 text-center">
+<div class="btn-group d-flex">
+<input type="submit" name="back" value="戻る" class="btn page-link text-dark" />
+<input type="submit" name="conf" value="確認" class="btn btn-primary" />
+</div>
+</div>
+</form>
+</div>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{commons/layout}">
+
+<div layout:fragment="contents">
+<form th:action="@{/schedule/add-action-conf}" th:object="${actionForm}" method="post">
+
+<div class="form-group row">
+<label for="action" class="col-form-label col-sm-3 text-sm-right">イベント名</label>
+<div class="col-sm-9">
+<input type="text" th:field="*{action}" th:errorclass="is-invalid" class="form-control" />
+<span th:errors="*{action}" class="badge badge-danger text-left"></span>
+</div>
+</div>
+
+<input type="hidden" th:field="*{trainTripId}" />
+<input type="hidden" th:field="*{dayNumber}" />
+<input type="hidden" th:field="*{arrTime}" />
+
+<div class="col-sm-6 offset-sm-3 text-center">
+<div class="btn-group d-flex">
+<input type="submit" name="back" value="戻る" class="btn page-link text-dark" />
+<input type="submit" name="conf" value="確認" class="btn btn-primary" />
+</div>
+</div>
+</form>
+
+</div>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{commons/layout}">
+
+<div layout:fragment="contents">
+
+<form th:action="@{/train-trip/}" method="get" style="display:inline">
+<input type="submit" name="input" value="電車旅一覧" class="btn btn-outline-secondary" />
+</form>
+<form th:action="@{/schedule/add-input}" method="post" style="display:inline">
+<input type="hidden" name="train-trip-id" th:value="${entity.id}" />
+<input type="submit" name="train-info" value="路線情報追加" class="btn btn-outline-primary" />
+</form>
+
+<table class="table" th:object="${entity}">
+<tr>
+<th>ID</th>
+<td th:text="*{id}"></td>
+</tr>
+<tr>
+<th>名称</th>
+<td th:text="*{value}"></td>
+</tr>
+<tr>
+<th>備考</th>
+<td th:text="*{note}"></td>
+</tr>
+</table>
+
+<form class="schedule-head" th:action="@{/train-trip/view}" method="post">
+<div th:if="${max} > 0">
+<select name="dayNumber" onChange="submit(this.form)" class="schedule">
+<option th:each="i : ${#numbers.sequence(1, max)}" th:selected="${dayNumber==i}" th:value="${i}" th:text="${i}+ '日目'"></option>
+</select>
+<input type="hidden" name="id" th:value="${entity.id}"/>
+<span th:text="${currentDay}" style="font-size:x-large; font-weight: bold; color: #119cb2; margin:0 50px;" class=""></span>
+</div>
+</form>
+
+<table class="table">
+<tr th:each="info : ${list}" th:object="${info}">
+<td th:if="*{depArr}"><span th:text="*{zonedDepArrTime} + ' ' + *{depArr}"></span></td>
+<td th:if="*{depArr}"><span th:text="*{stationName}"></span></td>
+<td th:if="*{depArr} == '発'"></td>
+<td th:if="*{depArr} == '着'">
+<form th:action="@{/schedule/submit-handle}" method ="post" style="display:inline">
+<input type="hidden" name="trainTripId" th:value="*{trainTripId}" />
+<input type="hidden" name="scheduleId" th:value="*{scheduleId}" />
+<input type="hidden" name="depArrInfoId" th:value="*{depArrInfoId}" />
+<input type="hidden" name="dayNumber" th:value="*{dayNumber}" />
+<input type="submit" name="delete" value="削除" class="btn btn-sm btn-outline-danger" />
+<input type="submit" name="event" value="この後にイベントを追加" class="btn btn-sm btn-outline-primary" />
+</form>
+</td>
+<td th:if="*{trainName}" colspan="4"><div class="row"><span th:text="*{trainName}" class="col-sm-9 offset-sm-2"></span></div></td>
+<td th:if="*{action}" colspan="4" class="event" style="font-size:x-large;"><span th:text="*{action}" class="badge badge-info offset-sm-2" style="padding:10px 15px;"></span></td>
+</tr>
+</table>
+
+</div>

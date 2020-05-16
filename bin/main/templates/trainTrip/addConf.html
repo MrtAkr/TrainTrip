@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{commons/layout}">
+
+<div layout:fragment="contents">
+<form th:action="@{/train-trip/add-done}" th:object="${trainForm}" method="post">
+
+<div th:include="trainTrip/conf :: confContents"></div>
+
+<div class="col-sm-6 offset-sm-3 text-center">
+<div class="btn-group d-flex">
+<input type="submit" name="back" value="戻る" class="btn page-link text-dark" />
+<input type="submit" name="done" value="実行" class="btn btn-primary" />
+</div>
+</div>
+</form>
+</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="train.trip.mapper.ScheduleListMapper">
+
+  <select id="selectByDay" resultType="train.trip.dto.ScheduleResultDto">
+    SELECT i.id AS depArrInfoId,train_trip_id,day_number,train_name,action,
+    	schedule_id,dep_arr_time,station_name,dep_arr
+	FROM schedule s
+	INNER JOIN dep_arr_info i
+	ON s.id = i.schedule_id
+	WHERE train_trip_id = #{id}
+	AND day_number = #{num}
+	ORDER BY IF(TIME_FORMAT(dep_arr_time,'%k') > 14, 
+    		dep_arr_time - INTERVAL 15 HOUR, 
+    		dep_arr_time + INTERVAL 9 HOUR) ASC 
+  </select>
+  
+  <select id="getMaxDayNumber" resultType="java.lang.Integer">
+    SELECT MAX(day_number) 
+    FROM schedule 
+    WHERE train_trip_id = #{id}
+    GROUP BY train_trip_id
+  </select>
+
+</mapper>
