@@ -34,18 +34,25 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping(value="/add-input", params="train-info")
-	public String insertTrainInput(@ModelAttribute("daiForm") DepArrInfoForm form, @RequestParam("train-trip-id") String trainTripId, Model model) {
+	public String insertTrainInput(Model model, 
+			@ModelAttribute("daiForm") DepArrInfoForm form, 
+			@RequestParam("train-trip-id") String trainTripId, 
+			@RequestParam("day-number") String strDayNumber) {
 		int id = Integer.parseInt(trainTripId);
+		int dayNumber = Integer.parseInt(strDayNumber);
 		form.setTrainTripId(id);
+		form.setDayNumber(dayNumber);
 		model.addAttribute("next", service.getNextDayNumber(id));
 		return "schedule/add";
 	}
 	
 	@RequestMapping(value= "/add-conf", params="back")
-	public String back(@RequestParam("trainTripId") String trainTripId, RedirectAttributes redirectAttribute) {
-		redirectAttribute.addAttribute("id", trainTripId);
-		redirectAttribute.addAttribute("view", "");
-		return "redirect:/train-trip/view-handle";
+	public String back(RedirectAttributes redirectAttribute,
+			@RequestParam("trainTripId") String id,
+			@RequestParam("dayNumber") String dayNumber) {
+		redirectAttribute.addAttribute("id", id);
+		redirectAttribute.addAttribute("dayNumber", dayNumber);
+		return "redirect:/train-trip/view";
 	}
 	
 	@RequestMapping(value= "/add-conf", params="conf")
@@ -62,7 +69,9 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value="/add-done", params="done")
-	public String insertScheduleDone(@ModelAttribute("daiForm") DepArrInfoForm form, Model model, RedirectAttributes redirect) {
+	public String insertScheduleDone(Model model, 
+			RedirectAttributes redirectAttribute,
+			@ModelAttribute("daiForm") DepArrInfoForm form) {
 		try {
 			service.addTrainSchedule(form);
 			
@@ -70,8 +79,9 @@ public class ScheduleController {
 			model.addAttribute("err", ExceptionUtils.getStackTrace(e));
 			return "error";
 		}
-		
-		redirect.addFlashAttribute("trainTripId", form.getTrainTripId());
+
+		redirectAttribute.addFlashAttribute("id", form.getTrainTripId());
+		redirectAttribute.addFlashAttribute("dayNumber", form.getDayNumber());
 		return "redirect:/schedule/add-end";
 	}
 	

@@ -15,16 +15,6 @@
 </div>
 
 <div class="form-group row">
-<label for="dayNumber" class="col-form-label col-sm-3 text-sm-right"></label>
-<div class="col-sm-9">
-<select th:field="*{dayNumber}">
-<option th:each="i : ${#numbers.sequence(1, next)}" th:value="${i}" th:text="${i}+ '日目'"></option>
-</select>
-<span th:errors="*{dayNumber}" class="badge badge-danger text-left"></span>
-</div>
-</div>
-
-<div class="form-group row">
 <label for="trainName" class="col-form-label col-sm-3 text-sm-right">乗車路線名</label>
 <div class="col-sm-9">
 <input type="text" th:field="*{trainName}" th:errorclass="is-invalid" class="form-control" />
@@ -83,6 +73,7 @@
 </div>
 
 <input type="hidden" th:field="*{trainTripId}" />
+<input type="hidden" th:field="*{dayNumber}" />
 
 <div class="col-sm-6 offset-sm-3 text-center">
 <div class="btn-group d-flex">

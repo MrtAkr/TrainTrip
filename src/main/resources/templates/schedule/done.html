@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>電車旅</title>
-<link rel="stylesheet" href="/style.css">
-</head>
-<body>
-<h1>電車旅</h1>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{commons/layout}">
+
+<div layout:fragment="contents">
 
 <div>登録しました</div>
 
-<form th:action="@{/train-trip/view-handle}" method="post">
-<input type="hidden" name="id" th:value="${trainTripId}" />
-<input type="submit" name="view" value="詳細へ"/>
+<form th:action="@{/train-trip/view}" method="post">
+<input type="hidden" name="id" th:value="${id}" />
+<input type="hidden" name="dayNumber" th:value="${dayNumber}" />
+<input type="submit" name="view" value="詳細へ" class="btn page-link text-dark" />
 </form>
-</body>
-</html>
+</div>

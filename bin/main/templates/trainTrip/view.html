@@ -11,6 +11,7 @@
 </form>
 <form th:action="@{/schedule/add-input}" method="post" style="display:inline">
 <input type="hidden" name="train-trip-id" th:value="${entity.id}" />
+<input type="hidden" name="day-number" th:value="${dayNumber}" />
 <input type="submit" name="train-info" value="路線情報追加" class="btn btn-outline-primary" />
 </form>
 
@@ -31,11 +32,11 @@
 
 <form class="schedule-head" th:action="@{/train-trip/view}" method="post">
 <div th:if="${max} > 0">
-<select name="dayNumber" onChange="submit(this.form)" class="schedule">
-<option th:each="i : ${#numbers.sequence(1, max)}" th:selected="${dayNumber==i}" th:value="${i}" th:text="${i}+ '日目'"></option>
+<select name="dayNumber" onChange="submit(this.form)" class="schedule day-number">
+<option th:each="i : ${#numbers.sequence(1, max + 1)}" th:selected="${dayNumber==i}" th:value="${i}" th:text="${i}+ '日目'"></option>
 </select>
 <input type="hidden" name="id" th:value="${entity.id}"/>
-<span th:text="${currentDay}" style="font-size:x-large; font-weight: bold; color: #119cb2; margin:0 50px;" class=""></span>
+<span th:text="${currentDay}" class="date-title"></span>
 </div>
 </form>
 

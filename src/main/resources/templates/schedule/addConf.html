@@ -10,21 +10,6 @@
 
 <table class="table">
 <tr>
-<td>日順</td>
-<td>
-<span th:text="*{dayNumber}"></span>日目
-<input type="hidden" th:field="*{dayNumber}" />
-</td>
-</tr>
-<!--
-<tr>
-<th>曜日</th>
-<td>
-<span th:text="*{dayOfWeek}"></span>
-<input type="hidden" th:field="*{dayOfWeek}" /></td>
-</tr>
--->
-<tr>
 <td>乗車路線名</td>
 <td>
 <span th:text="*{trainName}"></span>
@@ -66,7 +51,9 @@
 <input type="hidden" th:field="*{arrStationName}" /></td>
 </tr>
 </table>
+
 <input type="hidden" th:field="*{trainTripId}" />
+<input type="hidden" th:field="*{dayNumber}" />
 
 <div class="col-sm-6 offset-sm-3 text-center">
 <div class="btn-group d-flex">
@@ -75,5 +62,4 @@
 </div>
 </div>
 </form>
-</body>
-</html>
+</div>
