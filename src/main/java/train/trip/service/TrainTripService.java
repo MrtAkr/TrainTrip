@@ -75,17 +75,16 @@ public class TrainTripService {
 	
 	public void getScheduleList(List<ScheduleListDto> list, Integer id, Integer dayNumber) {
 		List<ScheduleResultDto> rs = dao.selectByDay(id, dayNumber);
-		boolean sw = false;
+
 		for (ScheduleResultDto dto : rs) {
 			if (dto.getAction() != null && dto.getStationName() == null) {
-				if (sw) {
-					sw = false;
-					continue;
-				}
-				ScheduleListDto dep = new ScheduleListDto();
-				dep.setAction(dto.getAction());
-				list.add(dep);
-				sw = true;
+				ScheduleListDto act = new ScheduleListDto();
+				act.setAction(dto.getAction());
+				act.setDepArrInfoId(dto.getDepArrInfoId());
+				act.setDayNumber(dto.getDayNumber());
+				act.setScheduleId(dto.getScheduleId());
+				act.setTrainTripId(dto.getTrainTripId());
+				list.add(act);
 				continue;
 			}
 			

@@ -13,9 +13,9 @@ public class ScheduleListDto {
 	private String trainName;
 	private String action;
 
-	public LocalTime getZonedDepArrTime() {
-		return depArrTime.plusHours(9);
-	}
+//	public LocalTime getZonedDepArrTime() {
+//		return depArrTime.plusHours(9);
+//	}
 
 	public Integer getTrainTripId() {
 		return trainTripId;
