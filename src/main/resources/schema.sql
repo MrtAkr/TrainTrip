@@ -25,8 +25,8 @@ DROP TABLE IF EXISTS `dep_arr_info`;
 CREATE TABLE dep_arr_info(id INT UNSIGNED NOT NULL AUTO_INCREMENT comment "発着情報ID"
 , schedule_id INT UNSIGNED NOT NULL comment "スケジュールID"
 , dep_arr_time TIME NOT NULL comment "発着時刻"
-, station_name VARCHAR(32) NOT NULL comment "駅名"
-, dep_arr CHAR(1) NOT NULL comment "発着"
+, station_name VARCHAR(32) comment "駅名"
+, dep_arr CHAR(1) comment "発着"
 , PRIMARY KEY (id)
 , FOREIGN KEY (schedule_id) REFERENCES schedule (id) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 comment "発着情報";
